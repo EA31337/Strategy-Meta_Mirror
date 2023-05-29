@@ -6,7 +6,7 @@
 
 /**
  * @file
- * Implements Meta_Mirror strategy.
+ * Implements Mirror meta strategy.
  */
 
 // Includes the main code.

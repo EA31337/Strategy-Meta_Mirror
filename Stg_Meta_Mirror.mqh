@@ -1,6 +1,6 @@
 /**
  * @file
- * Implements Meta Mirror strategy.
+ * Implements Mirror meta strategy.
  */
 
 // Prevents processing this includes file multiple times.
@@ -271,4 +271,4 @@ class Stg_Meta_Mirror : public Strategy {
   }
 };
 
-#endif  // STG_META_MULTI_MQH
+#endif  // STG_META_MIRROR_MQH
