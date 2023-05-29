@@ -3,11 +3,15 @@
  * Implements Meta Mirror strategy.
  */
 
+// Prevents processing this includes file multiple times.
+#ifndef STG_META_MIRROR_MQH
+#define STG_META_MIRROR_MQH
+
 // User input params.
 INPUT2_GROUP("Meta Mirror strategy: main params");
 INPUT2 unsigned int Meta_Mirror_Active_Strategies = (1 << 3) + (1 << 4) + (1 << 5) + (1 << 6) + (1 << 8) + (1 << 11) +
-                                                   (1 << 15) + (1 << 20) + (1 << 21) + (1 << 22) + (1 << 23) +
-                                                   (1 << 24);  // Active strategies
+                                                    (1 << 15) + (1 << 20) + (1 << 21) + (1 << 22) + (1 << 23) +
+                                                    (1 << 24);  // Active strategies
 INPUT2_GROUP("Meta Mirror strategy: common params");
 INPUT2 float Meta_Mirror_LotSize = 0;                // Lot size
 INPUT2 int Meta_Mirror_SignalOpenMethod = 0;         // Signal open method
@@ -236,3 +240,5 @@ class Stg_Meta_Mirror : public Strategy {
     return _result;
   }
 };
+
+#endif  // STG_META_MULTI_MQH
