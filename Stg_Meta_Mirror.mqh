@@ -1,65 +1,65 @@
 /**
  * @file
- * Implements Meta Multi strategy.
+ * Implements Meta Mirror strategy.
  */
 
 // User input params.
-INPUT2_GROUP("Meta Multi strategy: main params");
-INPUT2 unsigned int Meta_Multi_Active_Strategies = (1 << 3) + (1 << 4) + (1 << 5) + (1 << 6) + (1 << 8) + (1 << 11) +
+INPUT2_GROUP("Meta Mirror strategy: main params");
+INPUT2 unsigned int Meta_Mirror_Active_Strategies = (1 << 3) + (1 << 4) + (1 << 5) + (1 << 6) + (1 << 8) + (1 << 11) +
                                                    (1 << 15) + (1 << 20) + (1 << 21) + (1 << 22) + (1 << 23) +
                                                    (1 << 24);  // Active strategies
-INPUT2_GROUP("Meta Multi strategy: common params");
-INPUT2 float Meta_Multi_LotSize = 0;                // Lot size
-INPUT2 int Meta_Multi_SignalOpenMethod = 0;         // Signal open method
-INPUT2 float Meta_Multi_SignalOpenLevel = 0;        // Signal open level
-INPUT2 int Meta_Multi_SignalOpenFilterMethod = 32;  // Signal open filter method
-INPUT2 int Meta_Multi_SignalOpenFilterTime = 3;     // Signal open filter time (0-31)
-INPUT2 int Meta_Multi_SignalOpenBoostMethod = 0;    // Signal open boost method
-INPUT2 int Meta_Multi_SignalCloseMethod = 0;        // Signal close method
-INPUT2 int Meta_Multi_SignalCloseFilter = 32;       // Signal close filter (-127-127)
-INPUT2 float Meta_Multi_SignalCloseLevel = 0;       // Signal close level
-INPUT2 int Meta_Multi_PriceStopMethod = 0;          // Price limit method
-INPUT2 float Meta_Multi_PriceStopLevel = 2;         // Price limit level
-INPUT2 int Meta_Multi_TickFilterMethod = 32;        // Tick filter method (0-255)
-INPUT2 float Meta_Multi_MaxSpread = 4.0;            // Max spread to trade (in pips)
-INPUT2 short Meta_Multi_Shift = 0;                  // Shift
-INPUT2 float Meta_Multi_OrderCloseLoss = 80;        // Order close loss
-INPUT2 float Meta_Multi_OrderCloseProfit = 80;      // Order close profit
-INPUT2 int Meta_Multi_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
+INPUT2_GROUP("Meta Mirror strategy: common params");
+INPUT2 float Meta_Mirror_LotSize = 0;                // Lot size
+INPUT2 int Meta_Mirror_SignalOpenMethod = 0;         // Signal open method
+INPUT2 float Meta_Mirror_SignalOpenLevel = 0;        // Signal open level
+INPUT2 int Meta_Mirror_SignalOpenFilterMethod = 32;  // Signal open filter method
+INPUT2 int Meta_Mirror_SignalOpenFilterTime = 3;     // Signal open filter time (0-31)
+INPUT2 int Meta_Mirror_SignalOpenBoostMethod = 0;    // Signal open boost method
+INPUT2 int Meta_Mirror_SignalCloseMethod = 0;        // Signal close method
+INPUT2 int Meta_Mirror_SignalCloseFilter = 32;       // Signal close filter (-127-127)
+INPUT2 float Meta_Mirror_SignalCloseLevel = 0;       // Signal close level
+INPUT2 int Meta_Mirror_PriceStopMethod = 0;          // Price limit method
+INPUT2 float Meta_Mirror_PriceStopLevel = 2;         // Price limit level
+INPUT2 int Meta_Mirror_TickFilterMethod = 32;        // Tick filter method (0-255)
+INPUT2 float Meta_Mirror_MaxSpread = 4.0;            // Max spread to trade (in pips)
+INPUT2 short Meta_Mirror_Shift = 0;                  // Shift
+INPUT2 float Meta_Mirror_OrderCloseLoss = 80;        // Order close loss
+INPUT2 float Meta_Mirror_OrderCloseProfit = 80;      // Order close profit
+INPUT2 int Meta_Mirror_OrderCloseTime = -30;         // Order close time in mins (>0) or bars (<0)
 
 // Structs.
 
 // Defines struct with default user strategy values.
-struct Stg_Meta_Multi_Params_Defaults : StgParams {
-  Stg_Meta_Multi_Params_Defaults()
-      : StgParams(::Meta_Multi_SignalOpenMethod, ::Meta_Multi_SignalOpenFilterMethod, ::Meta_Multi_SignalOpenLevel,
-                  ::Meta_Multi_SignalOpenBoostMethod, ::Meta_Multi_SignalCloseMethod, ::Meta_Multi_SignalCloseFilter,
-                  ::Meta_Multi_SignalCloseLevel, ::Meta_Multi_PriceStopMethod, ::Meta_Multi_PriceStopLevel,
-                  ::Meta_Multi_TickFilterMethod, ::Meta_Multi_MaxSpread, ::Meta_Multi_Shift) {
-    Set(STRAT_PARAM_LS, Meta_Multi_LotSize);
-    Set(STRAT_PARAM_OCL, Meta_Multi_OrderCloseLoss);
-    Set(STRAT_PARAM_OCP, Meta_Multi_OrderCloseProfit);
-    Set(STRAT_PARAM_OCT, Meta_Multi_OrderCloseTime);
-    Set(STRAT_PARAM_SOFT, Meta_Multi_SignalOpenFilterTime);
+struct Stg_Meta_Mirror_Params_Defaults : StgParams {
+  Stg_Meta_Mirror_Params_Defaults()
+      : StgParams(::Meta_Mirror_SignalOpenMethod, ::Meta_Mirror_SignalOpenFilterMethod, ::Meta_Mirror_SignalOpenLevel,
+                  ::Meta_Mirror_SignalOpenBoostMethod, ::Meta_Mirror_SignalCloseMethod, ::Meta_Mirror_SignalCloseFilter,
+                  ::Meta_Mirror_SignalCloseLevel, ::Meta_Mirror_PriceStopMethod, ::Meta_Mirror_PriceStopLevel,
+                  ::Meta_Mirror_TickFilterMethod, ::Meta_Mirror_MaxSpread, ::Meta_Mirror_Shift) {
+    Set(STRAT_PARAM_LS, Meta_Mirror_LotSize);
+    Set(STRAT_PARAM_OCL, Meta_Mirror_OrderCloseLoss);
+    Set(STRAT_PARAM_OCP, Meta_Mirror_OrderCloseProfit);
+    Set(STRAT_PARAM_OCT, Meta_Mirror_OrderCloseTime);
+    Set(STRAT_PARAM_SOFT, Meta_Mirror_SignalOpenFilterTime);
   }
 };
 
-class Stg_Meta_Multi : public Strategy {
+class Stg_Meta_Mirror : public Strategy {
  protected:
   DictStruct<long, Ref<Strategy>> strats;
 
  public:
-  Stg_Meta_Multi(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
+  Stg_Meta_Mirror(StgParams &_sparams, TradeParams &_tparams, ChartParams &_cparams, string _name = "")
       : Strategy(_sparams, _tparams, _cparams, _name) {}
 
-  static Stg_Meta_Multi *Init(ENUM_TIMEFRAMES _tf = NULL, EA *_ea = NULL) {
+  static Stg_Meta_Mirror *Init(ENUM_TIMEFRAMES _tf = NULL, EA *_ea = NULL) {
     // Initialize strategy initial values.
-    Stg_Meta_Multi_Params_Defaults stg_demo_defaults;
-    StgParams _stg_params(stg_demo_defaults);
+    Stg_Meta_Mirror_Params_Defaults stg_mirror_defaults;
+    StgParams _stg_params(stg_mirror_defaults);
     // Initialize Strategy instance.
     ChartParams _cparams(_tf, _Symbol);
     TradeParams _tparams;
-    Strategy *_strat = new Stg_Meta_Multi(_stg_params, _tparams, _cparams, "(Meta) Multi");
+    Strategy *_strat = new Stg_Meta_Mirror(_stg_params, _tparams, _cparams, "(Meta) Mirror");
     return _strat;
   }
 
@@ -76,7 +76,7 @@ class Stg_Meta_Multi : public Strategy {
     long _magic_no = Get<long>(STRAT_PARAM_ID);
     ENUM_TIMEFRAMES _tf = Get<ENUM_TIMEFRAMES>(STRAT_PARAM_TF);
     for (int _sid = 0; _sid < sizeof(int) * 8; ++_sid) {
-      if ((Meta_Multi_Active_Strategies & (1 << _sid)) != 0) {
+      if ((Meta_Mirror_Active_Strategies & (1 << _sid)) != 0) {
         switch (_sid) {
           case 1 << 0:
             _result &= StrategyAdd<Stg_ADX>(_tf, _magic_no, _sid);

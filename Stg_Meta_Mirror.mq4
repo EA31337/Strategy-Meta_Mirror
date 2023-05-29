@@ -6,8 +6,8 @@
 
 /**
  * @file
- * Implements Meta_Multi strategy.
+ * Implements Meta_Mirror strategy.
  */
 
 // Includes the main code.
-#include "Stg_Meta_Multi.mq5"
+#include "Stg_Meta_Mirror.mq5"
