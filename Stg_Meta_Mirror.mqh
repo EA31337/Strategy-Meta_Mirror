@@ -160,12 +160,6 @@ class Stg_Meta_Mirror : public Strategy {
         case STRAT_MACD:
           _result &= StrategyAdd<Stg_MACD>(_tf, _magic_no, _stype);
           break;
-        case STRAT_META_MIRROR:
-          _result &= StrategyAdd<Stg_Meta_Mirror>(_tf, _magic_no, _stype);
-          break;
-        case STRAT_META_MULTI:
-          _result &= StrategyAdd<Stg_Meta_Multi>(_tf, _magic_no, _stype);
-          break;
         case STRAT_MFI:
           _result &= StrategyAdd<Stg_MFI>(_tf, _magic_no, _stype);
           break;
